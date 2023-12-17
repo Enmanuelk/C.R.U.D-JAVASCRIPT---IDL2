@@ -3,14 +3,14 @@ let listaEmpleados = [];
 const objEmpleado = {
     id: '',
     nombre: '',
-    puesto: ''
+    cargo: ''
 }
 
 let editando = false;
 
 const formulario = document.querySelector('#formulario');
 const nombreInput = document.querySelector('#nombre');
-const puestoInput = document.querySelector('#puesto');
+const cargoInput = document.querySelector('#cargo');
 const btnAgregarInput = document.querySelector('#btnAgregar');
 
 formulario.addEventListener('submit', validarFormulario);
@@ -18,7 +18,7 @@ formulario.addEventListener('submit', validarFormulario);
 function validarFormulario(e) {
     e.preventDefault();
 
-    if(nombreInput.value === '' || puestoInput.value === '') {
+    if(nombreInput.value === '' || cargoInput.value === '') {
         alert('Todos los campos se deben llenar');
         return;
     }
@@ -29,7 +29,7 @@ function validarFormulario(e) {
     } else {
         objEmpleado.id = Date.now();
         objEmpleado.nombre = nombreInput.value;
-        objEmpleado.puesto = puestoInput.value;
+        objEmpleado.cargo = cargoInput.value;
 
         agregarEmpleado();
     }
@@ -48,7 +48,7 @@ function agregarEmpleado() {
 function limpiarObjeto() {
     objEmpleado.id = '';
     objEmpleado.nombre = '';
-    objEmpleado.puesto = '';
+    objEmpleado.cargo = '';
 }
 
 function mostrarEmpleados() {
@@ -57,10 +57,10 @@ function mostrarEmpleados() {
     const divEmpleados = document.querySelector('.div-empleados');
     
     listaEmpleados.forEach(empleado => {
-        const {id, nombre, puesto} = empleado;
+        const {id, nombre, cargo} = empleado;
 
         const parrafo = document.createElement('p');
-        parrafo.textContent = `${id} - ${nombre} - ${puesto} - `;
+        parrafo.textContent = `${id} - ${nombre} - ${cargo} - `;
         parrafo.dataset.id = id;
 
         const editarBoton = document.createElement('button');
@@ -83,10 +83,10 @@ function mostrarEmpleados() {
 }
 
 function cargarEmpleado(empleado) {
-    const {id, nombre, puesto} = empleado;
+    const {id, nombre, cargo} = empleado;
 
     nombreInput.value = nombre;
-    puestoInput.value = puesto;
+    puestoInput.value = cargo;
 
     objEmpleado.id = id;
 
@@ -98,14 +98,14 @@ function cargarEmpleado(empleado) {
 function editarEmpleado() {
 
     objEmpleado.nombre = nombreInput.value;
-    objEmpleado.puesto = puestoInput.value;
+    objEmpleado.cargo = cargoInput.value;
 
     listaEmpleados.map(empleado => {
 
         if(empleado.id === objEmpleado.id) {
             empleado.id = objEmpleado.id;
             empleado.nombre = objEmpleado.nombre;
-            empleado.puesto = objEmpleado.puesto;
+            empleado.cargo = objEmpleado.cargo;
 
         }
 
